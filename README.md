@@ -13,3 +13,5 @@ pip install sympy
 ```bash
  python equation.py 
 ```
+### Some examples:
+![Here is a basic example image](./images/termux_screenshot.jpg)

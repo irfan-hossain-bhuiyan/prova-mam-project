@@ -40,6 +40,10 @@ class Graph:
         # Create a NumPy array of screen coordinates
         screen_coords = np.column_stack((screen_x, screen_y))
         return screen_coords
+    def to_screen_coord(self,x,y):
+        screen_x=self.rect.centerx+x*self.scale()
+        screen_y=self.rect.centery-y*self.scale()
+        return pygame.Vector2(screen_x,screen_y)
     def to_graph_coords(self, points):
         # Convert screen coordinates (as a NumPy array) to graph coordinates (as a NumPy array)
         graph_x = (points[:, 0] - self.rect.centerx) / self.scale()
@@ -48,6 +52,10 @@ class Graph:
         # Create a NumPy array of graph coordinates
         graph_coords = np.column_stack((graph_x, graph_y))
         return graph_coords
+    def to_graph_coord(self,x,y):
+        graph_x=(x-self.rect.centerx)/self.scale()
+        graph_y=(self.rect.centery-y)/self.scale()
+        return pygame.Vector2(graph_x,graph_y)
    # def draw_lines(self,screen,x_point0,y_point0,x_point1,y_point1,color=BLACK,width=1):
    #     pygame.draw.line(screen, color, self.to_screen_coords(x_point0, y_point0),
    #                          self.to_screen_coords(x_point1, y_point1), width)
@@ -73,18 +81,46 @@ class Graph:
     
 
 
+   # def draw_grid(self):
+   #     # Draw horizontal grid lines and annotations
+   #      y_points=np.linspace(-self.max_y(),self.max_y(),2*self.__y_lines()+1)
+   #      x_points=np.linspace(-self.max_x(),self.max_x(),2*self.__x_lines()+1)
+   #      max_x=np.full_like(y_points,self.max_x())
+   #      max_y=np.full_like(x_points,self.max_y())
+   #      y_lines_point0=np.column_stack((-max_x,y_points))
+   #      y_lines_point1=np.column_stack((max_x,y_points))
+   #      x_lines_point0=np.column_stack((x_points,-max_y))
+   #      x_lines_point1=np.column_stack((x_points,max_y))
+   #      self.draw_linesS(y_lines_point0,y_lines_point1)
+   #      self.draw_linesS(x_lines_point0,x_lines_point1)
+       
     def draw_grid(self):
         # Draw horizontal grid lines and annotations
-         y_points=np.linspace(-self.max_y(),self.max_y(),2*self.__y_lines()+1)
-         x_points=np.linspace(-self.max_x(),self.max_x(),2*self.__x_lines()+1)
-         max_x=np.full_like(y_points,self.max_x())
-         max_y=np.full_like(x_points,self.max_y())
-         y_lines_point0=np.column_stack((-max_x,y_points))
-         y_lines_point1=np.column_stack((max_x,y_points))
-         x_lines_point0=np.column_stack((x_points,-max_y))
-         x_lines_point1=np.column_stack((x_points,max_y))
-         self.draw_linesS(y_lines_point0,y_lines_point1)
-         self.draw_linesS(x_lines_point0,x_lines_point1)
+        y_points = np.linspace(-self.max_y(), self.max_y(), 2 * self.__y_lines() + 1)
+        x_points = np.linspace(-self.max_x(), self.max_x(), 2 * self.__x_lines() + 1)
+        max_x = np.full_like(y_points, self.max_x())
+        max_y = np.full_like(x_points, self.max_y())
+        y_lines_point0 = np.column_stack((-max_x, y_points))
+        y_lines_point1 = np.column_stack((max_x, y_points))
+        x_lines_point0 = np.column_stack((x_points, -max_y))
+        x_lines_point1 = np.column_stack((x_points, max_y))
+        self.draw_linesS(y_lines_point0, y_lines_point1)
+        self.draw_linesS(x_lines_point0, x_lines_point1)
+    
+        # Annotate the grid lines with text numbers
+        for y in y_points:
+            text = str(int(y))
+            text_surface = pygame.font.Font(None, 24).render(text, True, BLACK)
+            text_rect = text_surface.get_rect()
+            text_rect.center = self.to_screen_coord(0, y)
+            self.screen.blit(text_surface, text_rect)
+    
+        for x in x_points:
+            text = str(int(x))
+            text_surface = pygame.font.Font(None, 24).render(text, True, BLACK)
+            text_rect = text_surface.get_rect()
+            text_rect.center = self.to_screen_coord(x, 0)
+            self.screen.blit(text_surface, text_rect)
     def draw(self):
         # Draw the graph axes
        # pygame.draw.line(screen, BLACK, self.to_screen_coords(-self.__x_lines * self.one_unit, 0),

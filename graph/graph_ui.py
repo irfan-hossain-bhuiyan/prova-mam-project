@@ -3,25 +3,18 @@ import pygame
 import sys
 import sympy
 import numpy as np
-pygame.init()
-
-# Constants for colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GRID_COLOR = (200, 200, 200)
-
-# Initialize Pygame window
-screen_width, screen_height = 800, 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Zoomable Graph with Grid Annotations Example")
-
+    
 class Graph:
-    def __init__(self,screen, x, y, width, height, one_unit=1, grid_spacing=10):
+    def __init__(self,screen, x, y, width, height, one_unit=1, grid_spacing=10,font=None):
         self.rect = pygame.Rect(x, y, width, height)
         self.one_unit = one_unit
         self.grid_spacing = grid_spacing
         self.screen=screen
+        self.font=pygame.font.Font(None,32) if font is None else font
     def scale(self) -> float:
         return self.grid_spacing / self.one_unit
     def __x_lines(self):
@@ -110,14 +103,14 @@ class Graph:
         # Annotate the grid lines with text numbers
         for y in y_points:
             text = str(int(y))
-            text_surface = pygame.font.Font(None, 24).render(text, True, BLACK)
+            text_surface = self.font.render(text, True, BLACK)
             text_rect = text_surface.get_rect()
             text_rect.center = self.to_screen_coord(0, y)
             self.screen.blit(text_surface, text_rect)
     
         for x in x_points:
             text = str(int(x))
-            text_surface = pygame.font.Font(None, 24).render(text, True, BLACK)
+            text_surface = self.font.render(text, True, BLACK)
             text_rect = text_surface.get_rect()
             text_rect.center = self.to_screen_coord(x, 0)
             self.screen.blit(text_surface, text_rect)
@@ -130,26 +123,37 @@ class Graph:
 
         # Draw the grid lines and annotations
         self.draw_grid()
+def main():
+    pygame.init()
+    
+    # Constants for colors
+   
+    # Initialize Pygame window
+    screen_width, screen_height = 800, 600
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Zoomable Graph with Grid Annotations Example")
+    graph = Graph(screen,0, 0, 800, 600, 1, 20)  # Centered at (0, 0) with a scale of 20 pixels per unit and grid spacing of 20 pixels
+    x_symbol=sympy.symbols('x')
+    y_symbol=sympy.symbols('y')
+    contour=equation_to_line_func(x_symbol**2-y_symbol)
+    lines=contour(-10,10,-10,10,100,100)
+    # Main loop
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        screen.fill(WHITE)
+        # Draw the graph
+        graph.draw()
+        #pygame.draw.lines(screen,BLACK,True,lines)
+    
+        for x in lines:graph.draw_linesC(x,width=3)
+        pygame.display.flip()
+        #graph.draw_linesC(lines.to_list())
+    
+    pygame.quit()
+    sys.exit()
+if __name__=="__main__":
+    main()
 
-graph = Graph(screen,0, 0, 800, 600, 1, 20)  # Centered at (0, 0) with a scale of 20 pixels per unit and grid spacing of 20 pixels
-x_symbol=sympy.symbols('x')
-y_symbol=sympy.symbols('y')
-contour=equation_to_line_func(x_symbol**2-y_symbol)
-lines=contour(-10,10,-10,10,100,100)
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    screen.fill(WHITE)
-    # Draw the graph
-    graph.draw()
-    #pygame.draw.lines(screen,BLACK,True,lines)
-
-    for x in lines:graph.draw_linesC(x,width=3)
-    pygame.display.flip()
-    #graph.draw_linesC(lines.to_list())
-
-pygame.quit()
-sys.exit()

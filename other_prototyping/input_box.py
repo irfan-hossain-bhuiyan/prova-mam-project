@@ -13,6 +13,7 @@ CYAN = pygame.Color(0, 255, 255)
 class InputBox:
     def __init__(
         self,
+        screen:pygame.Surface,
         x: int,
         y: int,
         width: int,
@@ -23,6 +24,7 @@ class InputBox:
         onEnter: Optional[Callable[['InputBox'], None]] = None,
         active: bool = True,
     ):
+        self.screen=screen
         self.rect = pygame.Rect(x, y, width, height)
         self.color = CYAN
         self.text = ''
@@ -49,35 +51,40 @@ class InputBox:
                     self.text = self.text[:-1]
                 else:
                     self.text += event.unicode
-    def draw(self,screen:pygame.Surface):
-        pygame.draw.rect(screen, input_box.rect_color, input_box.rect, 2)
-        txt_surface = input_box.font.render(input_box.text, True, input_box.font_color)
-        screen.blit(txt_surface, (input_box.rect.x + 5, input_box.rect.y + 5))
+    def draw(self):
+        pygame.draw.rect(self.screen, self.rect_color, self.rect, 2)
+        txt_surface = self.font.render(self.text, True, self.font_color)
+        self.screen.blit(txt_surface, (self.rect.x + 5,self.rect.y + 5))
 
+
+def main():
 # Initialize Pygame window
-screen_width, screen_height = 1600, 900
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Input Box Example")
+    screen_width, screen_height = 1600, 900
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Input Box Example")
+    
+    # Initialize font
+    font = pygame.font.Font(None, 32)
+    
+    # Create an InputBox instance
+    input_box = InputBox(screen,100, 50, 200, 40, font)
+    
+    # Main loop
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            input_box.handle_event(event)
+    
+        screen.fill(WHITE)
+        input_box.draw()
+        # Draw the input box
+    
+        pygame.display.flip()
+    
+    pygame.quit()
+    sys.exit()
 
-# Initialize font
-font = pygame.font.Font(None, 32)
-
-# Create an InputBox instance
-input_box = InputBox(100, 50, 200, 40, font)
-
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        input_box.handle_event(event)
-
-    screen.fill(WHITE)
-    input_box.draw(screen)
-    # Draw the input box
-
-    pygame.display.flip()
-
-pygame.quit()
-sys.exit()
+if __name__=="__main__":
+    main()

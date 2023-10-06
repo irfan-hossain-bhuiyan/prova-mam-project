@@ -3,13 +3,11 @@ import pygame
 import sys
 import sympy
 import numpy as np
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
+from external_dependencies.color import BLACK,WHITE
 GRID_COLOR = (200, 200, 200)
     
 class Graph:
-    def __init__(self,screen, x, y, width, height, one_unit=1, grid_spacing=10,font=None):
+    def __init__(self,screen, x, y, width, height, one_unit=1, grid_spacing=30,font=None):
         self.rect = pygame.Rect(x, y, width, height)
         self.one_unit = one_unit
         self.grid_spacing = grid_spacing

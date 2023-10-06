@@ -1,8 +1,9 @@
+
 import pygame
 import sys
-import color
-from graph_ui import Graph
-from input_box import InputBox
+from external_dependencies import color
+from ui.graph_ui import Graph
+from ui.input_box import InputBox
 import equation.equation_to_lines as eqTolines
 import equation.string_to_equatuion as strToeq
 GRAPH_RESOLUTION=20

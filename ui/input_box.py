@@ -1,15 +1,10 @@
-
 import pygame
 import sys
 from typing import Optional, Callable
 
-pygame.init()
-
 # Constants for colors
-BLACK = pygame.Color(0, 0, 0)
-WHITE = pygame.Color(255, 255, 255)
-CYAN = pygame.Color(0, 255, 255)
 
+from external_dependencies.color import BLACK,CYAN,WHITE
 class InputBox:
     def __init__(
         self,
@@ -85,7 +80,9 @@ class InputBox:
             self.last_cursor_toggle = current_time
 
 def main():
+    pygame.init()
     # Initialize Pygame window
+    #from ..external_dependencies.color import WHITE
     screen_width, screen_height = 1600, 900
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Input Box Example")

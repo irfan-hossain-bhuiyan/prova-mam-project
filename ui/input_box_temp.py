@@ -1,10 +1,13 @@
+
 import pygame
 import sys
 from typing import Optional, Callable
 
 # Constants for colors
 
-from external_dependencies.color import BLACK,CYAN,WHITE
+BLACK=pygame.Color(0,0,0)
+CYAN=pygame.Color(125,200,200)
+WHITE=pygame.Color(255,255,255)
 class InputBox:
     def __init__(
         self,
@@ -16,8 +19,6 @@ class InputBox:
         font=None,
         rect_color: pygame.Color = CYAN,
         font_color: pygame.Color = BLACK,
-        placeholder:str="",
-        placeholder_color:pygame.Color=pygame.Color(200,200,200),
         onEnter: Optional[Callable[['InputBox'], None]] = None,
         active: bool = True,
         cursor_blink_interval: int = 500,  # Blink interval in milliseconds
@@ -35,8 +36,7 @@ class InputBox:
         self.cursor_blink_interval = cursor_blink_interval
         self.last_cursor_toggle = pygame.time.get_ticks()
         self.cursor_position = 0  # Initial cursor position
-        self.placeholder = placeholder
-        self.placeholder_color=placeholder_color
+
     def handle_event(self, event):
         # Checking if the input box was clicked or not.
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -53,8 +53,7 @@ class InputBox:
                         self.onEnter(self)
                 elif event.key == pygame.K_BACKSPACE:
                     if self.cursor_position > 0:
-                        self.text = self.text[:self.cursor_position - 1] + \
-                        self.text[self.cursor_position:]
+                        self.text = self.text[:self.cursor_position - 1] + self.text[self.cursor_position:]
                         self.cursor_position -= 1
                 elif event.key == pygame.K_LEFT:
                     if self.cursor_position > 0:
@@ -63,24 +62,18 @@ class InputBox:
                     if self.cursor_position < len(self.text):
                         self.cursor_position += 1
                 else:
-                    self.text = self.text[:self.cursor_position] + event.unicode \
-                            + self.text[self.cursor_position:]
+                    self.text = self.text[:self.cursor_position] + event.unicode + self.text[self.cursor_position:]
                     self.cursor_position += 1
 
     def draw(self):
         self.update_cursor()
         pygame.draw.rect(self.screen, self.rect_color, self.rect, 2)
-        if self.text:
-            txt_surface = self.font.render(self.text, True, self.font_color)
-        else:
-            txt_surface = self.font.render(self.placeholder, True,\
-                    self.placeholder_color)
+        txt_surface = self.font.render(self.text, True, self.font_color)
         cursor_x = self.rect.x + 5 + self.font.size(self.text[:self.cursor_position])[0]
 
         if self.cursor_visible and self.active:
             cursor_y = self.rect.y + 5
-            pygame.draw.line(self.screen, self.font_color, (cursor_x, cursor_y), \
-                    (cursor_x, cursor_y + self.font.get_height()), 2)
+            pygame.draw.line(self.screen, self.font_color, (cursor_x, cursor_y), (cursor_x, cursor_y + self.font.get_height()), 2)
 
         self.screen.blit(txt_surface, (self.rect.x + 5, self.rect.y + 5))
 
@@ -93,6 +86,7 @@ class InputBox:
 def main():
     pygame.init()
     # Initialize Pygame window
+    #from ..external_dependencies.color import WHITE
     screen_width, screen_height = 1600, 900
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Input Box Example")
@@ -101,8 +95,7 @@ def main():
     font = pygame.font.Font(None, 32)
 
     # Create an InputBox instance
-    input_box = InputBox(screen, 100, 50, 200, 40,\
-            font, onEnter=lambda x: print(x.text),placeholder="Enter your age:")
+    input_box = InputBox(screen, 100, 50, 200, 40, font, onEnter=lambda x: print(x.text))
 
     # Main loop
     running = True
@@ -111,6 +104,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             input_box.handle_event(event)
+
 
         screen.fill(WHITE)
         input_box.draw()

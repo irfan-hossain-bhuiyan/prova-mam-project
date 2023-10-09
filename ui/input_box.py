@@ -3,7 +3,6 @@ import sys
 from typing import Optional, Callable
 
 # Constants for colors
-
 from external_dependencies.color import BLACK,CYAN,WHITE
 class InputBox:
     def __init__(

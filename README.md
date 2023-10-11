@@ -15,7 +15,8 @@ pip install sympy contourpy pygame
 ```
 or press the main.py file.
 ### Some examples:
-![Here is a basic example image](./images/termux_screenshot.jpg)
 
 This is the graph algorithm I am currently working.
 ![Here is a graph image](./images/termux_graph_screenshot.jpg)
+Here is a better version.
+![video](./images/graph_video.mp4)

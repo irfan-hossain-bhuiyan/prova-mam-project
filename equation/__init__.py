@@ -2,9 +2,11 @@ import numpy as np
 from contourpy import contour_generator
 import sympy as sp
 from sympy.core import SympifyError
+from ui.graph_ui import Graph
 x,y=sp.symbols("x,y")
 SymplifyError=-2
 OtherError=-1
+
 
 #Converting string to equation.Because it doesn't have a result type,
 #I am using Value to define error.
@@ -38,6 +40,7 @@ def equation_to_line_func(equation):
         +np.array([xmin,ymin])
         return graph_lines
     return to_lines
+
 def main():
     equation_str = "x**2 + y**2 = 4"
     equation = convert_to_standard_form(equation_str)

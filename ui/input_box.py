@@ -3,7 +3,7 @@ import sys
 from typing import Optional, Callable
 
 # Constants for colors
-from external_dependencies.color import BLACK,CYAN,WHITE
+from external_dependencies.color import BLACK,CYAN,WHITE,RED
 from ui.ui_component_trait import Tcomponent
 class InputBox(Tcomponent):
     def __init__(
@@ -39,11 +39,27 @@ class InputBox(Tcomponent):
         self.placeholder = placeholder
         self.placeholder_color=placeholder_color
         self.allowed_key=allowed_key
+        self.panic_text = None
+    def panic(self, error: str):
+        # Display an error message in red
+        self.text = error
+        self.font_color = RED
+        self.panic_text = error
+
     def handle_event(self, event):
+        if self.panic_text:
+            # If there is a panic message and the user starts typing, 
+            #clear the panic state
+            if event.type == pygame.KEYDOWN and event.unicode and \
+                    event.key not in (pygame.K_RETURN, pygame.K_BACKSPACE):
+                self.text = ''
+                self.font_color = BLACK
+                self.panic_text = None
         # Checking if the input box was clicked or not.
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                self.active = not self.active
+                self.active = True
                 self.cursor_visible = True
             else:
                 self.active = False

@@ -36,7 +36,7 @@ def main():
            lines=contour(-graph.max_x(),graph.max_x(),-graph.max_y(),graph.max_y()\
                    ,graph.max_x()*GRAPH_RESOLUTION,graph.max_y()*GRAPH_RESOLUTION)
        except:
-           raise ValueError("Invalid equation is given")
+           inputBox.panic("The equation isn't valid.Make sure it works.")
    def onXInputEnter(box:InputBox): 
        if equation is None:
            return

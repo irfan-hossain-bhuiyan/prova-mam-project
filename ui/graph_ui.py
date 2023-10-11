@@ -13,6 +13,7 @@ class Graph(Tcomponent):
         self.grid_spacing = grid_spacing
         self.screen=screen
         self.font=pygame.font.Font(None,32) if font is None else font
+        self.lines=[]
     def scale(self) -> float:
         return self.grid_spacing / self.one_unit
     def __x_lines(self):
@@ -114,14 +115,9 @@ class Graph(Tcomponent):
             text_rect.center = self.to_screen_coord(x, 0)
             self.screen.blit(text_surface, text_rect)
     def draw(self):
-        # Draw the graph axes
-       # pygame.draw.line(screen, BLACK, self.to_screen_coords(-self.__x_lines * self.one_unit, 0),
-       #                  self.to_screen_coords(self.__x_lines * self.one_unit, 0), 2)
-       # pygame.draw.line(screen, BLACK, self.to_screen_coords(0, -self.__y_lines * self.one_unit),
-       #                  self.to_screen_coords(0, self.__y_lines * self.one_unit), 2)
-
-        # Draw the grid lines and annotations
         self.draw_grid()
+        for x in self.lines:
+            self.draw_linesC(x,width=3)
 def main():
     from equation import equation_to_line_func
     pygame.init()

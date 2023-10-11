@@ -1,11 +1,8 @@
 import numpy as np
 from contourpy import contour_generator
 import sympy as sp
-from sympy.core import SympifyError
 from ui.graph_ui import Graph
 x,y=sp.symbols("x,y")
-SymplifyError=-2
-OtherError=-1
 
 
 #Converting string to equation.Because it doesn't have a result type,
@@ -23,10 +20,8 @@ def convert_to_standard_form(equation_str):
         standard_form = eqLeft - eqRight
         return standard_form
 
-    except sp.SympifyError:
-        return SympifyError 
     except:
-        return OtherError
+        return -1
 # Example usage:
 def equation_to_line_func(equation):
     equation_function = sp.lambdify((x, y), equation, "numpy")
@@ -40,6 +35,11 @@ def equation_to_line_func(equation):
         +np.array([xmin,ymin])
         return graph_lines
     return to_lines
+
+def equation_to_graph_render(equation,graph:Graph,resolution:int):
+    contour=equation_to_line_func(equation)
+    graph.lines=contour(-graph.max_x(),graph.max_x(),-graph.max_y(),graph.max_y()\
+                   ,graph.max_x()*resolution,graph.max_y()*resolution)
 
 def main():
     equation_str = "x**2 + y**2 = 4"

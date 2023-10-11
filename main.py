@@ -4,7 +4,7 @@ import pygame
 from external_dependencies import color
 from ui.graph_ui import Graph
 from ui.input_box import InputBox
-from equation import equation_to_line_func,convert_to_standard_form
+from equation import equation_to_line_func,convert_to_standard_form,equation_to_graph_render
 GRAPH_RESOLUTION=20
 equation=None
 
@@ -22,28 +22,28 @@ def from_down(y:int):
 def main():
    pygame.init() 
    screen=pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-   lines=[]
+   #lines=[]
    graph=Graph(x=0,y=0,screen=screen,width=SCREEN_WIDTH,height=SCREEN_HEIGHT)
    def onInputBoxEnter(inputBox:InputBox):
        input=inputBox.text
        if input=="":
            return
-       try:
-           equation=convert_to_standard_form(input)
-           contour=equation_to_line_func(equation)
-           inputBox.text=str(equation)+"=0"
-           nonlocal lines
-           lines=contour(-graph.max_x(),graph.max_x(),-graph.max_y(),graph.max_y()\
-                   ,graph.max_x()*GRAPH_RESOLUTION,graph.max_y()*GRAPH_RESOLUTION)
-       except:
-           inputBox.panic("The equation isn't valid.Make sure it works.")
+       equation=convert_to_standard_form(input)
+       inputBox.panic("The equation is not error.")
+       inputBox.text=str(equation)+"=0"
+       equation_to_graph_render(equation,graph,GRAPH_RESOLUTION) 
    def onXInputEnter(box:InputBox): 
        if equation is None:
            return
        text=box.text
        if text=="":
            return
-       text=float(eval(text))
+       try:
+           text=float(eval(text))
+       except:
+           box.panic("Can't evaluate input.")
+
+
 
        box.text=""
    def onYInputEnter(box:InputBox):
@@ -73,16 +73,13 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             for component in components:
-                try:
                     component.handle_event(event)
-                except:
-                    pass
         screen.fill(color.WHITE)
         for component in components:
             component.draw()
         # Draw the graph
-        for x in lines:
-            graph.draw_linesC(x,width=3)
+       # for x in lines:
+       #     graph.draw_linesC(x,width=3)
         pygame.display.flip()
    pygame.quit()
 

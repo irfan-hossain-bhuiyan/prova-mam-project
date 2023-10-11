@@ -4,8 +4,7 @@ import pygame
 from external_dependencies import color
 from ui.graph_ui import Graph
 from ui.input_box import InputBox
-import equation.equation_to_lines as eqTolines
-import equation.string_to_equatuion as strToeq
+from equation import equation_to_line_func,convert_to_standard_form
 GRAPH_RESOLUTION=20
 equation=None
 
@@ -30,8 +29,8 @@ def main():
        if input=="":
            return
        try:
-           equation=strToeq.convert_to_standard_form(input)
-           contour=eqTolines.equation_to_line_func(equation)
+           equation=convert_to_standard_form(input)
+           contour=equation_to_line_func(equation)
            inputBox.text=str(equation)+"=0"
            nonlocal lines
            lines=contour(-graph.max_x(),graph.max_x(),-graph.max_y(),graph.max_y()\

@@ -19,7 +19,7 @@ class InputBox(Tcomponent):
         placeholder:str="",
         placeholder_color:pygame.Color=pygame.Color(200,200,200),
         onEnter: Optional[Callable[['InputBox'], None]] = None,
-        active: bool = True,
+        active: bool = False,
         cursor_blink_interval: int = 500,  # Blink interval in milliseconds
         allowed_key=None,
     ):

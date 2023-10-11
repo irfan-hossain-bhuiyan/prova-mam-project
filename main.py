@@ -5,9 +5,10 @@ from external_dependencies import color
 from ui.graph_ui import Graph
 from ui.input_box import InputBox
 from equation import equation_to_line_func,convert_to_standard_form,equation_to_graph_render
+import sympy as sp
+x,y=sp.symbols("x y")
 GRAPH_RESOLUTION=20
 equation=None
-
 SCREEN_WIDTH ,SCREEN_HEIGHT =1080,760
 def from_left(x:int):
     return x
@@ -28,11 +29,29 @@ def main():
        input=inputBox.text
        if input=="":
            return
+       global equation
        equation=convert_to_standard_form(input)
-       inputBox.panic("The equation is not error.")
+       if equation is None:
+           inputBox.panic("The equation is not error.")
        inputBox.text=str(equation)+"=0"
        equation_to_graph_render(equation,graph,GRAPH_RESOLUTION) 
+  
+#        if equation is None:
+#            return 
+#        text=box.text
+#        if text=="":
+#            return
+#        print("text")
+#
+#    #So after processing the text cleaning it.
+#        box.text=""
+#       ##euation box positioning.
+        
+   inbox=InputBox(screen,x=from_left(10),y=from_down(60),width=SCREEN_WIDTH-20,height=50,\
+           onEnter=onInputBoxEnter,placeholder="Enter equation:",\
+           allowed_key='0123456789^*+-=/()xy.',active=True)
    def onXInputEnter(box:InputBox): 
+       global equation
        if equation is None:
            return
        text=box.text
@@ -40,26 +59,33 @@ def main():
            return
        try:
            text=float(eval(text))
+           #x=sp.symbols("x")
+           equation=equation.subs(x,x+text)
+           inbox.text=str(equation)+"=0"
+           equation_to_graph_render(equation,graph,GRAPH_RESOLUTION)
+           box.text=""
+       except:
+           box.panic("Can't evaluate input.")
+
+   def onYInputEnter(box:InputBox):
+       global equation
+       if equation is None:
+           return
+       text=box.text
+       if text=="":
+           return
+       try:
+           text=float(eval(text))
+           #y=sp.symbols("y")
+           equation=equation.subs(y,y+text)
+           inbox.text=str(equation)+"=0"
+           equation_to_graph_render(equation,graph,GRAPH_RESOLUTION)
+           box.text=""
        except:
            box.panic("Can't evaluate input.")
 
 
 
-       box.text=""
-   def onYInputEnter(box:InputBox):
-        if equation is None:
-            return 
-        text=box.text
-        if text=="":
-            return
-        print("text")
-
-    #So after processing the text cleaning it.
-        box.text=""
-       ##euation box positioning.
-   inbox=InputBox(screen,x=from_left(10),y=from_down(60),width=SCREEN_WIDTH-20,height=50,\
-           onEnter=onInputBoxEnter,placeholder="Enter equation:",\
-           allowed_key='0123456789^*+-=/()xy.')
    x_input=InputBox(screen,x=from_right(200),y=from_down(110),width=150,\
            height=40,onEnter=onXInputEnter,placeholder="Enter x shift:",
                     allowed_key='0123456789^*+-=/().')

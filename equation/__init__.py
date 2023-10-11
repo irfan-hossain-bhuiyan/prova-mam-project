@@ -21,7 +21,7 @@ def convert_to_standard_form(equation_str):
         return standard_form
 
     except:
-        return -1
+        return None
 # Example usage:
 def equation_to_line_func(equation):
     equation_function = sp.lambdify((x, y), equation, "numpy")

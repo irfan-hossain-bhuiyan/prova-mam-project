@@ -1,12 +1,12 @@
-from equation.equation_to_lines import equation_to_line_func
 import pygame
 import sys
 import sympy
 import numpy as np
 from external_dependencies.color import BLACK,WHITE
+from ui.ui_component_trait import Tcomponent
 GRID_COLOR = (200, 200, 200)
     
-class Graph:
+class Graph(Tcomponent):
     def __init__(self,screen, x, y, width, height, one_unit=1, grid_spacing=30,font=None):
         self.rect = pygame.Rect(x, y, width, height)
         self.one_unit = one_unit
@@ -70,7 +70,8 @@ class Graph:
         screen_points = self.to_screen_coords(points)
         pygame.draw.lines(self.screen,color,closed,screen_points,width)
     
-
+    def handle_event(self, event):
+        pass
 
    # def draw_grid(self):
    #     # Draw horizontal grid lines and annotations
@@ -122,6 +123,7 @@ class Graph:
         # Draw the grid lines and annotations
         self.draw_grid()
 def main():
+    from equation import equation_to_line_func
     pygame.init()
     
     # Constants for colors

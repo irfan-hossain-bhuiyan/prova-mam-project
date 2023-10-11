@@ -4,7 +4,8 @@ from typing import Optional, Callable
 
 # Constants for colors
 from external_dependencies.color import BLACK,CYAN,WHITE
-class InputBox:
+from ui.ui_component_trait import Tcomponent
+class InputBox(Tcomponent):
     def __init__(
         self,
         screen: pygame.Surface,
@@ -20,6 +21,7 @@ class InputBox:
         onEnter: Optional[Callable[['InputBox'], None]] = None,
         active: bool = True,
         cursor_blink_interval: int = 500,  # Blink interval in milliseconds
+        allowed_key=None,
     ):
         self.screen = screen
         self.rect = pygame.Rect(x, y, width, height)
@@ -36,6 +38,7 @@ class InputBox:
         self.cursor_position = 0  # Initial cursor position
         self.placeholder = placeholder
         self.placeholder_color=placeholder_color
+        self.allowed_key=allowed_key
     def handle_event(self, event):
         # Checking if the input box was clicked or not.
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -61,9 +64,9 @@ class InputBox:
                 elif event.key == pygame.K_RIGHT:
                     if self.cursor_position < len(self.text):
                         self.cursor_position += 1
-                else:
-                    self.text = self.text[:self.cursor_position] + event.unicode \
-                            + self.text[self.cursor_position:]
+                elif self.allowed_key is None or event.unicode in self.allowed_key:
+                    self.text = self.text[:self.cursor_position] + \
+                            event.unicode + self.text[self.cursor_position:]
                     self.cursor_position += 1
 
     def draw(self):

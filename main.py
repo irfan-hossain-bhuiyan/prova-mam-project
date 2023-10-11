@@ -1,5 +1,6 @@
+from typing import List
+from ui.ui_component_trait import Tcomponent
 import pygame
-import sys
 from external_dependencies import color
 from ui.graph_ui import Graph
 from ui.input_box import InputBox
@@ -43,29 +44,30 @@ def main():
        text=box.text
        if text=="":
            return
+       text=float(eval(text))
+
        box.text=""
-       text=float(text)
-       #equation=equation as 
-       print("text")
    def onYInputEnter(box:InputBox):
         if equation is None:
             return 
         text=box.text
         if text=="":
             return
-        box.text=""
         print("text")
 
-        
-
+    #So after processing the text cleaning it.
+        box.text=""
        ##euation box positioning.
    inbox=InputBox(screen,x=from_left(10),y=from_down(60),width=SCREEN_WIDTH-20,height=50,\
-           onEnter=onInputBoxEnter,placeholder="Enter equation:")
+           onEnter=onInputBoxEnter,placeholder="Enter equation:",\
+           allowed_key='0123456789^*+-=/()xy.')
    x_input=InputBox(screen,x=from_right(200),y=from_down(110),width=150,\
-           height=40,onEnter=onXInputEnter,placeholder="Enter x shift:")
+           height=40,onEnter=onXInputEnter,placeholder="Enter x shift:",
+                    allowed_key='0123456789^*+-=/().')
    y_input=InputBox(screen,x=from_right(200),y=from_down(160),width=150,\
-           height=40,onEnter=onYInputEnter,placeholder="Enter y shift:")
-   components=[inbox,x_input,y_input,graph]
+           height=40,onEnter=onYInputEnter,placeholder="Enter y shift:",
+                    allowed_key='0123456789^*+-=/()')
+   components:List[Tcomponent]=[inbox,x_input,y_input,graph]
    running=True
    while running:
         for event in pygame.event.get():
@@ -84,7 +86,6 @@ def main():
             graph.draw_linesC(x,width=3)
         pygame.display.flip()
    pygame.quit()
-   sys.exit()
 
 if __name__=="__main__":
     main()

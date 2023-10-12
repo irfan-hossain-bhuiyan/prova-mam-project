@@ -70,6 +70,13 @@ class Graph(Tcomponent):
         # Convert graph coordinates to screen coordinates
         screen_points = self.to_screen_coords(points)
         pygame.draw.lines(self.screen,color,closed,screen_points,width)
+    def draw_point(self, point, color=BLACK, size=3):
+        screen_point = self.to_screen_coord(*point)
+        pygame.draw.circle(self.screen, color,screen_point, size)
+
+    def draw_points(self, points, color=BLACK, size=3):
+        for screen_point in self.to_screen_coords(points):
+            pygame.draw.circle(self.screen,color,screen_point, size)
     
     def handle_event(self, event):
         pass
@@ -105,15 +112,17 @@ class Graph(Tcomponent):
             text = str(int(y))
             text_surface = self.font.render(text, True, BLACK)
             text_rect = text_surface.get_rect()
-            text_rect.center = self.to_screen_coord(0, y)
+            text_rect.topright = self.to_screen_coord(0, y)
             self.screen.blit(text_surface, text_rect)
+            self.draw_point((0,y))
     
         for x in x_points:
             text = str(int(x))
             text_surface = self.font.render(text, True, BLACK)
             text_rect = text_surface.get_rect()
-            text_rect.center = self.to_screen_coord(x, 0)
+            text_rect.topright = self.to_screen_coord(x, 0)
             self.screen.blit(text_surface, text_rect)
+            self.draw_point((x,0))
     def draw(self):
         self.draw_grid()
         for x in self.lines:

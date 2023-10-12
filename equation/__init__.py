@@ -31,6 +31,8 @@ def equation_to_line_func(equation):
         X, Y = np.meshgrid(x, y)
         c=contour_generator(z=equation_function(X,Y))
         matrix_lines=c.lines(0)
+        if len(matrix_lines)==0:
+            return np.array([])
         graph_lines=matrix_lines/np.array([resolutionx-1,resolutiony-1])*np.array([xmax-xmin,ymax-ymin])\
         +np.array([xmin,ymin])
         return graph_lines

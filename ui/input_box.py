@@ -26,7 +26,7 @@ class InputBox(Tcomponent):
         self.screen = screen
         self.rect = pygame.Rect(x, y, width, height)
         self.color = CYAN
-        self.text = ''
+        self.__text = ''
         self.font = pygame.font.Font(None, 32) if font is None else font
         self.active = active
         self.onEnter = onEnter
@@ -40,19 +40,25 @@ class InputBox(Tcomponent):
         self.placeholder_color=placeholder_color
         self.allowed_key=allowed_key
         self.panic_text = None
+    @property
+    def text(self):
+        return self.__text
+    @text.setter
+    def text(self,other:str):
+        self.__text=other
+        self.cursor_position=len(other)
     def panic(self, error: str):
         # Display an error message in red
-        self.text = error
+        self.__text = error
         self.font_color = RED
         self.panic_text = error
-
     def handle_event(self, event):
         if self.panic_text:
             # If there is a panic message and the user starts typing, 
             #clear the panic state
             if event.type == pygame.KEYDOWN and event.unicode and \
                     event.key not in (pygame.K_RETURN, pygame.K_BACKSPACE):
-                self.text = ''
+                self.__text = ''
                 self.font_color = BLACK
                 self.panic_text = None
         # Checking if the input box was clicked or not.
@@ -71,29 +77,30 @@ class InputBox(Tcomponent):
                         self.onEnter(self)
                 elif event.key == pygame.K_BACKSPACE:
                     if self.cursor_position > 0:
-                        self.text = self.text[:self.cursor_position - 1] + \
-                        self.text[self.cursor_position:]
+                        self.__text = self.__text[:self.cursor_position - 1] + \
+                        self.__text[self.cursor_position:]
                         self.cursor_position -= 1
                 elif event.key == pygame.K_LEFT:
                     if self.cursor_position > 0:
                         self.cursor_position -= 1
                 elif event.key == pygame.K_RIGHT:
-                    if self.cursor_position < len(self.text):
+                    if self.cursor_position < len(self.__text):
                         self.cursor_position += 1
                 elif self.allowed_key is None or event.unicode in self.allowed_key:
-                    self.text = self.text[:self.cursor_position] + \
-                            event.unicode + self.text[self.cursor_position:]
-                    self.cursor_position += 1
+                    if event.unicode:
+                        self.__text = self.__text[:self.cursor_position] + \
+                            event.unicode + self.__text[self.cursor_position:]
+                        self.cursor_position += 1
 
     def draw(self):
         self.update_cursor()
         pygame.draw.rect(self.screen, self.rect_color, self.rect, 2)
-        if self.text:
-            txt_surface = self.font.render(self.text, True, self.font_color)
+        if self.__text:
+            txt_surface = self.font.render(self.__text, True, self.font_color)
         else:
             txt_surface = self.font.render(self.placeholder, True,\
                     self.placeholder_color)
-        cursor_x = self.rect.x + 5 + self.font.size(self.text[:self.cursor_position])[0]
+        cursor_x = self.rect.x + 5 + self.font.size(self.__text[:self.cursor_position])[0]
 
         if self.cursor_visible and self.active:
             cursor_y = self.rect.y + 5
@@ -120,7 +127,7 @@ def main():
 
     # Create an InputBox instance
     input_box = InputBox(screen, 100, 50, 200, 40,\
-            font, onEnter=lambda x: print(x.text),placeholder="Enter your age:")
+            font, onEnter=lambda x: print(x.__text),placeholder="Enter your age:")
 
     # Main loop
     running = True

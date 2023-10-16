@@ -49,7 +49,7 @@ def main():
         
    inbox=InputBox(screen,x=from_left(10),y=from_down(60),width=SCREEN_WIDTH-20,height=50,\
            onEnter=onInputBoxEnter,placeholder="Enter equation:",\
-           allowed_key='0123456789^*+-=/()xy.',active=True)
+           allowed_key='0123456789^*+-=/()xy.',active=True,rect_color=color.RED,placeholder_color=color.DARK_GRAY)
    def onXInputEnter(box:InputBox): 
        global equation
        if equation is None:
@@ -86,12 +86,12 @@ def main():
 
 
 
-   x_input=InputBox(screen,x=from_right(200),y=from_down(110),width=150,\
+   x_input=InputBox(screen,x=from_right(200),y=from_down(110),width=150,rect_color=color.RED,\
            height=40,onEnter=onXInputEnter,placeholder="Enter x shift:",
-                    allowed_key='0123456789^*+-=/().')
-   y_input=InputBox(screen,x=from_right(200),y=from_down(160),width=150,\
+                        allowed_key='0123456789^*+-=/().',placeholder_color=color.DARK_GRAY)
+   y_input=InputBox(screen,x=from_right(200),y=from_down(160),width=150,rect_color=color.RED,\
            height=40,onEnter=onYInputEnter,placeholder="Enter y shift:",
-                    allowed_key='0123456789^*+-=/()')
+                    allowed_key='0123456789^*+-=/()',placeholder_color=color.DARK_GRAY)
    components:List[Tcomponent]=[inbox,x_input,y_input,graph]
    running=True
    while running:

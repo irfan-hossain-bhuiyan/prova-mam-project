@@ -9,8 +9,9 @@ x,y=sp.symbols("x,y")
 #I am using Value to define error.
 def convert_to_standard_form(equation_str):
     # Define symbols
-    eqLeftStr,eqRightStr=equation_str.split("=",1)
+
     try:
+        eqLeftStr,eqRightStr=equation_str.split("=",1)
         # Parse the input equation string into a SymPy expression
         eqLeft = sp.sympify(eqLeftStr)
         eqRight= sp.sympify(eqRightStr)
@@ -33,8 +34,8 @@ def equation_to_line_func(equation):
         matrix_lines=c.lines(0)
         if len(matrix_lines)==0:
             return np.array([])
-        graph_lines=matrix_lines/np.array([resolutionx-1,resolutiony-1])*np.array([xmax-xmin,ymax-ymin])\
-        +np.array([xmin,ymin])
+        graph_lines=[matrix_line/np.array([resolutionx-1,resolutiony-1])*np.array([xmax-xmin,ymax-ymin])\
+        +np.array([xmin,ymin]) for matrix_line in matrix_lines]
         return graph_lines
     return to_lines
 

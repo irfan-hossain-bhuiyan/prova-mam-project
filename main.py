@@ -32,9 +32,10 @@ def main():
        global equation
        equation=convert_to_standard_form(input)
        if equation is None:
-           inputBox.panic("The equation is not error.")
-       inputBox.text=str(equation)+"=0"
-       equation_to_graph_render(equation,graph,GRAPH_RESOLUTION) 
+           inputBox.panic("The equation is not valid.")
+       else:
+          inputBox.text=str(equation)+"=0"
+          equation_to_graph_render(equation,graph,GRAPH_RESOLUTION) 
   
 #        if equation is None:
 #            return 

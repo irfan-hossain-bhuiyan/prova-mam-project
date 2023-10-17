@@ -9,9 +9,18 @@ x,y=sp.symbols("x,y")
 #I am using Value to define error.
 def convert_to_standard_form(equation_str):
     # Define symbols
-         
+    def transform_equation_string(equation_str):
+        transformed_str = ''
+        i = 0
+        while i < len(equation_str):
+            current_char = equation_str[i]
+            if current_char.isalpha() and i > 0 and equation_str[i-1].isdigit():
+                transformed_str += '*'
+            transformed_str += current_char
+            i += 1
+        return transformed_str    
 
-   
+    equation_str=transform_equation_string(equation_str) 
     try:
         eqLeftStr,eqRightStr=equation_str.split("=",1)
         # Parse the input equation string into a SymPy expression

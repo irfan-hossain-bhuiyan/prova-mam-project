@@ -30,10 +30,11 @@ def main():
        if input=="":
            return
        global equation
-       equation=convert_to_standard_form(input)
-       if equation is None:
+       equation_temp=convert_to_standard_form(input)
+       if equation_temp is None:
            inputBox.panic("The equation is not valid.")
        else:
+          equation=equation_temp
           inputBox.text=str(equation)+"=0"
           equation_to_graph_render(equation,graph,GRAPH_RESOLUTION) 
   

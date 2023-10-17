@@ -79,21 +79,13 @@ class Graph(Tcomponent):
             pygame.draw.circle(self.screen,color,screen_point, size)
     
     def handle_event(self, event):
-        pass
-
-   # def draw_grid(self):
-   #     # Draw horizontal grid lines and annotations
-   #      y_points=np.linspace(-self.max_y(),self.max_y(),2*self.__y_lines()+1)
-   #      x_points=np.linspace(-self.max_x(),self.max_x(),2*self.__x_lines()+1)
-   #      max_x=np.full_like(y_points,self.max_x())
-   #      max_y=np.full_like(x_points,self.max_y())
-   #      y_lines_point0=np.column_stack((-max_x,y_points))
-   #      y_lines_point1=np.column_stack((max_x,y_points))
-   #      x_lines_point0=np.column_stack((x_points,-max_y))
-   #      x_lines_point1=np.column_stack((x_points,max_y))
-   #      self.draw_linesS(y_lines_point0,y_lines_point1)
-   #      self.draw_linesS(x_lines_point0,x_lines_point1)
-       
+       # if event.type == pygame.MOUSEBUTTONDOWN:
+       #     if event.button == 4:  # Scroll up
+       #         self.grid_spacing -= 10
+       #     elif event.button == 5:  # Scroll down
+       #         self.grid_spacing += 10
+       pass
+      
     def draw_grid(self):
         # Draw horizontal grid lines and annotations
         y_points = np.linspace(-self.max_y(), self.max_y(), 2 * self.__y_lines() + 1)

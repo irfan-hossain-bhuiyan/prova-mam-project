@@ -62,7 +62,7 @@ def main():
        try:
            text=float(eval(text))
            #x=sp.symbols("x")
-           equation=equation.subs(x,x+text)
+           equation=sp.expand(equation.subs(x,x+text))
            inbox.text=str(equation)+"=0"
            equation_to_graph_render(equation,graph,GRAPH_RESOLUTION)
            box.text=""
@@ -79,7 +79,7 @@ def main():
        try:
            text=float(eval(text))
            #y=sp.symbols("y")
-           equation=equation.subs(y,y+text)
+           equation=sp.expand(equation.subs(y,y+text))
            inbox.text=str(equation)+"=0"
            equation_to_graph_render(equation,graph,GRAPH_RESOLUTION)
            box.text=""

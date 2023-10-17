@@ -9,21 +9,21 @@ GRID_COLOR = (200, 200, 200)
 class Graph(Tcomponent):
     def __init__(self,screen, x, y, width, height, one_unit=1, grid_spacing=30,font=None):
         self.rect = pygame.Rect(x, y, width, height)
-        self.one_unit = one_unit
-        self.grid_spacing = grid_spacing
+        self.__one_unit = one_unit
+        self.__grid_spacing = grid_spacing
         self.screen=screen
         self.font=pygame.font.Font(None,32) if font is None else font
         self.lines=[]
     def scale(self) -> float:
-        return self.grid_spacing / self.one_unit
+        return self.__grid_spacing / self.__one_unit
     def __x_lines(self):
-        return self.rect.width//(2*self.grid_spacing)
+        return self.rect.width//(2*self.__grid_spacing)
     def __y_lines(self):
-        return self.rect.height//(2*self.grid_spacing)
+        return self.rect.height//(2*self.__grid_spacing)
     def max_x(self):
-        return self.__x_lines()*self.one_unit
+        return self.__x_lines()*self.__one_unit
     def max_y(self):
-        return self.__y_lines()*self.one_unit   
+        return self.__y_lines()*self.__one_unit   
     def to_screen_coords(self, points):
         # Convert graph coordinates (as a NumPy array) to screen coordinates (as a NumPy array)
         screen_x = np.int32(self.rect.centerx + points[:, 0] * self.scale())
@@ -77,13 +77,9 @@ class Graph(Tcomponent):
     def draw_points(self, points, color=BLACK, size=3):
         for screen_point in self.to_screen_coords(points):
             pygame.draw.circle(self.screen,color,screen_point, size)
+
     
     def handle_event(self, event):
-       # if event.type == pygame.MOUSEBUTTONDOWN:
-       #     if event.button == 4:  # Scroll up
-       #         self.grid_spacing -= 10
-       #     elif event.button == 5:  # Scroll down
-       #         self.grid_spacing += 10
        pass
       
     def draw_grid(self):

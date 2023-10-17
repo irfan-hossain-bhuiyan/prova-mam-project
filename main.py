@@ -97,18 +97,21 @@ def main():
    components:List[Tcomponent]=[inbox,x_input,y_input,graph]
    running=True
    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            for component in components:
-                    component.handle_event(event)
-        screen.fill(color.WHITE)
-        for component in components:
-            component.draw()
-        # Draw the graph
-       # for x in lines:
-       #     graph.draw_linesC(x,width=3)
-        pygame.display.flip()
+       try:
+           for event in pygame.event.get():
+                 if event.type == pygame.QUIT:
+                     running = False
+                 for component in components:
+                         component.handle_event(event)
+           screen.fill(color.WHITE)
+           for component in components:
+                 component.draw()
+             # Draw the graph
+            # for x in lines:
+            #     graph.draw_linesC(x,width=3)
+           pygame.display.flip()
+       except:
+           inbox.panic("Some error occured.Don't know.")
    pygame.quit()
 
 if __name__=="__main__":

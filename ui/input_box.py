@@ -52,6 +52,7 @@ class InputBox(Tcomponent):
         self.__text = error
         self.font_color = RED
         self.panic_text = error
+        self.cursor_position=0
     def handle_event(self, event):
         if self.panic_text:
             # If there is a panic message and the user starts typing, 

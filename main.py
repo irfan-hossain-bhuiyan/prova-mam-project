@@ -38,17 +38,7 @@ def main():
           inputBox.text=str(equation)+"=0"
           equation_to_graph_render(equation,graph,GRAPH_RESOLUTION) 
   
-#        if equation is None:
-#            return 
-#        text=box.text
-#        if text=="":
-#            return
-#        print("text")
-#
-#    #So after processing the text cleaning it.
-#        box.text=""
-#       ##euation box positioning.
-        
+       
    inbox=InputBox(screen,x=from_left(10),y=from_down(60),width=SCREEN_WIDTH-20,height=50,\
            onEnter=onInputBoxEnter,placeholder="Enter equation:",\
            allowed_key='0123456789^*+-=/()xy.',active=True,rect_color=color.RED,placeholder_color=color.DARK_GRAY)

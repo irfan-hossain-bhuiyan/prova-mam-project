@@ -4,6 +4,23 @@ If you are reading this readme file.Go to this link
 https://github.com/irfan-hossain-bhuiyan/prova-mam-project
 
 ----------
+### Group A : COEFFICIENTS 
+#### TOPIC: Change of Axes-1 
+
+Roll         |Name                         |Designation    |Email
+-------------|-----------------------------|---------------|---------------------------------|
+2103088      |Irfan Hossain Bhuiyan        |Developer      |irfanhbhy@gmail.com |
+2103069      | Dina Sanjida                |Co-Ordinator   |dinasanjida0210@gmail.com | 
+2103065      | Md. Morakib Hossain         |Coder          |morakibnashit@gmail.com   |
+2103102      |Md. Anamul Haque             |Coder          |mdanamulhaque2084@gmail.com| 
+2103115      |Abdullah Al Maruf            |Coder          |abdullahovi.official@gmail.com|
+2103084      |Bishal Chandra Barmmon       |Math Solver    |bishalchandra44@gmail.com|
+2103111      |Nazifa Fairuz Zuthi          |Math Solver    |startrack613@gmail.com|
+2103119     |Arif Foysal Bin Haider        | Math Solver   |ariffoysalruetcse21@gmail.com |
+2103091     |Md. Meherul Islam Arfi        |Presenter      |meherul.jes003@gmail.com |
+2103083     |Mohammad Farhan Labib Khan    |Presenter       |labib1925@yahoo.com|
+
+---------
 
 # Math-1213 project
 Our project is about change of axes.Means how a equation will change after I want to change the center point (0,0) to  point (a,b).
@@ -282,6 +299,18 @@ if __name__=="__main__":
 Yeah,This is the simplified version how the program runs under the hood.
 
 
-That's all.
+## Result
+Making a graphing calculator,with visualing the change of axis,This kind of project is new to us.
+There are several things we learned from here:
+1. Studied about computer algebric system.This are tools to work with mathematical expression.
+It can solve from basic math problem,expand or factor polynomial and solve differential equation.
 
+One library like this was **sympy**
+
+2. Understand how  graph algorithm works.Understand about contour.
+3. Turns out graphics library is not good for this kind of job.But we did it anyway.
+
+
+<p align="center"> The End</p>
+Thanks for giving a project like this.It was a wonderful experinece.
 

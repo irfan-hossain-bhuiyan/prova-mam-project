@@ -1,4 +1,3 @@
-
 name: Build Exe
 
 on:
@@ -26,3 +25,9 @@ jobs:
       run: |
         pip install pyinstaller
         pyinstaller main.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: dist/main

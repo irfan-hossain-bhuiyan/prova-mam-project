@@ -23,6 +23,9 @@ def from_down(y:int):
 def main():
    pygame.init() 
    screen=pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+   pygame.display.set_caption("Change of axes")
+   icon_surface = pygame.Surface((32, 32), pygame.SRCALPHA)
+   pygame.display.set_icon(icon_surface)
    #lines=[]
    graph=Graph(x=0,y=0,screen=screen,width=SCREEN_WIDTH,height=SCREEN_HEIGHT)
    def onInputBoxEnter(inputBox:InputBox):

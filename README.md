@@ -26,6 +26,20 @@ There is already a precompiled program in the bin folder.
 
 1. Go to the bin folder.
 2. Run the main file.
+This it what you will see
+![program window](doc_images/program_image.jpg)
+
+- Now click in the input_box and type a valid equation.
+    - A valid equation will have one ```=``` sign.
+    - Only small ```x ,y ``` are allowed.
+    - Any key other than ```0123456789^*+-=/()xy.``` aren't allowed.
+    - You can use power by using ```**``` or ```^``` key
+    - An example is ```(x+2)^2+(y-1)^2=100```.If you type it you will get something like this->
+![Drawn circle](doc_images/Drawn_circle.jpg)
+
+    - After inputing -2 in the ```x input shift``` the graph shift,The circle comes to hte center again.
+![Shited circle](doc_images/Shifted_circle.jpg)
+
 
 ### Running from script.
 Also it can be compiled to source.
@@ -257,4 +271,8 @@ if __name__=="__main__":
 2. After taking input from ```x_input``` and ```y_input``` it replaces the equation with 
 ```x=x+x_input``` and ```y=y+y_input``` and render the graph accordigly.
 3. Then also input the input box accordingly.
+
+Yeah,This is the simplified version how the program runs under the hood.
+
+
 That's all.

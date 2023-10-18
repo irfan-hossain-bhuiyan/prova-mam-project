@@ -1,9 +1,12 @@
+
+
 If you are reading this readme file.Go to this link
 https://github.com/irfan-hossain-bhuiyan/prova-mam-project
 
+----------
 
 # Math-1213 project
-Our project is about shift of axis.Means how a equation will change after I want to change the point (0,0) to  point (a,b).
+Our project is about change of axes.Means how a equation will change after I want to change the center point (0,0) to  point (a,b).
 
 ## Setted Goal
 In our project,we set this goal,
@@ -15,9 +18,13 @@ In our project,we set this goal,
 5. Visualize the change in a graph to see,how the graph changes with the shift of axis.
 6. Being simple
 
-
-
 We did touched every one of those,We could add more,by the time being we restricted ourselve in simple.
+
+### The things we wanted to added but didn't got time
+
+1. A animation to show the graph is moving and visualzie it beutifully other then instantly.
+
+
 Now first see what our program can do,
 ![Program video](doc_images/run_program.gif)
 
@@ -276,3 +283,5 @@ Yeah,This is the simplified version how the program runs under the hood.
 
 
 That's all.
+
+

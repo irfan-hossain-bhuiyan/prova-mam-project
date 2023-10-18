@@ -49,6 +49,7 @@ Now first see what our program can do,
 There is already a precompiled program in the bin folder.
 
 1. Go to the bin folder.
+2. Extract the main folder.
 2. Run the main file.
 This it what you will see
 ![program window](doc_images/program_image.jpg)

@@ -9,7 +9,7 @@ https://github.com/irfan-hossain-bhuiyan/prova-mam-project
 
 Roll         |Name                         |Designation    |Email
 -------------|-----------------------------|---------------|---------------------------------|
-2103088      |Irfan Hossain Bhuiyan        |Developer      |irfanhbhy@gmail.com |
+2103088      |Irfan Hossain Bhuiyan       |Developer and Coder|irfanhbhy@gmail.com |
 2103069      | Dina Sanjida                |Co-Ordinator   |dinasanjida0210@gmail.com | 
 2103065      | Md. Morakib Hossain         |Coder          |morakibnashit@gmail.com   |
 2103102      |Md. Anamul Haque             |Coder          |mdanamulhaque2084@gmail.com| 

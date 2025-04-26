@@ -3,30 +3,12 @@
 If you are reading this readme file.Go to this link
 https://github.com/irfan-hossain-bhuiyan/prova-mam-project
 
-----------
-### Group A : COEFFICIENTS 
-#### TOPIC: Change of Axes-1 
-
-Roll         |Name                         |Designation    |Email
--------------|-----------------------------|---------------|---------------------------------|
-2103088      |Irfan Hossain Bhuiyan       |Developer and Coder|irfanhbhy@gmail.com |
-2103069      | Dina Sanjida                |Co-Ordinator   |dinasanjida0210@gmail.com | 
-2103065      | Md. Morakib Hossain         |Coder          |morakibnashit@gmail.com   |
-2103102      |Md. Anamul Haque             |Coder          |mdanamulhaque2084@gmail.com| 
-2103115      |Abdullah Al Maruf            |Coder          |abdullahovi.official@gmail.com|
-2103084      |Bishal Chandra Barmmon       |Math Solver    |bishalchandra44@gmail.com|
-2103111      |Nazifa Fairuz Zuthi          |Math Solver    |startrack613@gmail.com|
-2103119     |Arif Foysal Bin Haider        | Math Solver   |ariffoysalruetcse21@gmail.com |
-2103091     |Md. Meherul Islam Arfi        |Presenter      |meherul.jes003@gmail.com |
-2103083     |Mohammad Farhan Labib Khan    |Presenter       |labib1925@yahoo.com|
-
----------
 
 # Math-1213 project
 Our project is about change of axes.Means how a equation will change after I want to change the center point (0,0) to  point (a,b).
 
 ## Setted Goal
-In our project,we set this goal,
+In my project,I set this goal,
 
 1. Make an ui that I can visualize the input and output accordingly.
 2. Taking an equation as a user input.
@@ -35,14 +17,14 @@ In our project,we set this goal,
 5. Visualize the change in a graph to see,how the graph changes with the shift of axis.
 6. Being simple
 
-We did touched every one of those,We could add more,by the time being we restricted ourselve in simple.
+I did touched every one of those,We could add more,by the time being I restricted myself in simple.
 
-### The things we wanted to added but didn't got time
+### The things I wanted to added but didn't got time
 
 1. A animation to show the graph is moving and visualzie it beutifully other then instantly.
 
 
-Now first see what our program can do,
+Now first see what my program can do,
 ![Program video](doc_images/run_program.gif)
 
 ### Running the program.
@@ -104,7 +86,7 @@ So there are a lot of files.
 The dependencies I am using in the project:
 
 1. pygame *this is a game library I am using for the ui.Being so basic it gives me a lot of freedom.*
-2. numpy *Numpy is a matrix library. To  do fast numarical calculation numpy is a must.*
+2. numpy *Numpy is a matrix library. To  do fast numerical calculation,numpy is a must.*
 3. contourpy *This is a library to get 2d intersection point of the 3d graph.It is really performant*
 4. sympy *As the document says It is a computer algebric system.*
 
